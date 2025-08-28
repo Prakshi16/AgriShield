@@ -3,9 +3,14 @@ import "./App.css";
 
 function App() {
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0]; // ✅ FIXED: declare properly
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    }
   };
 
   const handleUpload = async () => {
@@ -35,47 +40,59 @@ function App() {
       </header>
 
       <main className="upload-section">
-        <div className="upload-box">
-          <div className="upload-icon">📷</div>
-          <h2>Upload Plant Photo</h2>
-          <p>
-            Take a clear photo of the affected plant leaves or drag and drop an
-            image here
-          </p>
+        {!preview ? ( // ⭐ NEW: Conditional UI (choose vs uploaded)
+          <div className="upload-box">
+            <div className="upload-icon">📷</div>
+            <h2>Upload Plant Photo</h2>
+            <p>
+              Take a clear photo of the affected plant leaves or drag and drop
+              an image here
+            </p>
 
-          <input
-            type="file"
-            id="fileInput"
-            onChange={handleFileChange}
-            hidden
-          />
-          <button
-            className="choose-btn"
-            onClick={() => document.getElementById("fileInput").click()}
-          >
-            Choose Photo
-          </button>
-
-          {file && <p className="filename">{file.name}</p>}
-
-          <div className="tips">
-            <h4>📸 Tips for best results:</h4>
-            <ul>
-              <li>Take photos in good lighting</li>
-              <li>Focus on affected leaves or areas</li>
-              <li>Avoid blurry or distant shots</li>
-              <li>Include multiple affected areas if possible</li>
-            </ul>
+            <input
+              type="file"
+              id="fileInput"
+              onChange={handleFileChange}
+              hidden
+            />
+            <button
+              className="choose-btn"
+              onClick={() => document.getElementById("fileInput").click()}
+            >
+              Choose Photo
+            </button>
           </div>
-
-          <button className="upload-btn" onClick={handleUpload}>
-            Upload
-          </button>
-        </div>
+        ) : (
+          <div className="preview-card">
+            {" "}
+            {/* ⭐ NEW: Preview UI */}
+            <div className="preview-header">
+              <h3>Uploaded Image</h3>
+              <button
+                className="choose-btn"
+                onClick={() => {
+                  document.getElementById("fileInput").click();
+                }}
+              >
+                Upload New
+              </button>
+              <input
+                type="file"
+                id="fileInput"
+                onChange={handleFileChange}
+                hidden
+              />
+            </div>
+            <img src={preview} alt="Uploaded preview" className="preview-img" />
+            <button className="analyze-btn" onClick={handleUpload}>
+              🍃 Analyze Plant Health
+            </button>
+          </div>
+        )}
       </main>
 
       <footer className="footer">
-        © 2025 CAgriShield. Helping farmers protect their crops with AI
+        © 2025 AgriShield. Helping farmers protect their crops with AI
         technology.
       </footer>
     </div>

@@ -85,3 +85,42 @@ body {
   text-align: center;
   font-size: 14px;
 }
+
+/* ⭐ NEW: Preview card styling */
+.preview-card {
+  background: #f0fdf4;
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 600px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.preview-img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.analyze-btn {
+  background: #004d40;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.analyze-btn:hover {
+  background: #00695c;
+}
