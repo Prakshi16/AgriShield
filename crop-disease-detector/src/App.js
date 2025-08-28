@@ -92,8 +92,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        © 2025 AgriShield. Helping farmers protect their crops with AI
-        technology.
+        © 2025 AgriShield. Helping farmers protect their crops with AI.
       </footer>
     </div>
   );
