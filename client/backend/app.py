@@ -27,19 +27,13 @@ IMG_SIZE = 128
 db = pymysql.connect(
     host="localhost",   # or your DB host
     user="root",        # your DB username
-    password="password",# your DB password
+    password="ShiroBeCutefr!!",# your DB password
     database="cropdb"   # your DB name
 )
 
 cursor = db.cursor()
 
-# Make sure you have a table like:
-# CREATE TABLE predictions (
-#   id INT AUTO_INCREMENT PRIMARY KEY,
-#   filename VARCHAR(255),
-#   prediction VARCHAR(100),
-#   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-# );
+
 
 # Helper: preprocess image
 
@@ -72,7 +66,23 @@ def predict():
     predicted_class = np.argmax(prediction, axis=1)[0]
 
     # Map prediction to class name
-    class_names = ["Apple___healthy", "Apple___scab", "Tomato___mosaic_virus"]  # <-- replace with your dataset classes
+    class_names = ["Pepper__bell___Bacterial_spot",
+                    "Pepper__bell___healthy",
+                    "Potato___Early_blight",
+                    "Potato___healthy",
+                    "Potato___Late_blight",
+                    "Tomato__Target_Spot",
+                    "Tomato__Tomato_mosaic_virus",
+                    "Tomato__Tomato_YellowLeaf__Curl_Virus",
+                    "Tomato_Bacterial_spot",
+                    "Tomato_Early_blight"
+                    "Tomato_healthy"
+                    "Tomato_Late_blight"
+                    "Tomato_Leaf_Mold",
+                    "Tomato_Septoria_leaf_spot",
+                    "Tomato_Spider_mites_Two_spotted_spider_mite"
+
+                    ]  # <-- replace with your dataset classes
     result = class_names[predicted_class]
 
     # Store in DB

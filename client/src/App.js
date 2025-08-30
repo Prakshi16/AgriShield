@@ -14,23 +14,24 @@ function App() {
   };
 
   const handleUpload = async () => {
-    if (!file) return alert("Please choose a file!");
+  if (!file) return alert("Please choose a file!");
 
-    const formData = new FormData();
-    formData.append("image", file);
+  const formData = new FormData();
+  formData.append("file", file); // ✅ must be "file" to match Flask
 
-    try {
-      const res = await fetch("http://localhost:5000/upload", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      alert(data.message);
-    } catch (err) {
-      console.error(err);
-      alert("Upload failed");
-    }
-  };
+  try {
+    const res = await fetch("http://localhost:5000/predict", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+    alert("Prediction: " + data.prediction);
+  } catch (err) {
+    console.error(err);
+    alert("Upload failed");
+  }
+};
+
 
   return (
     <div className="app">
