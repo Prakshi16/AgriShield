@@ -1,0 +1,8 @@
+CREATE DATABASE cropdb;
+USE cropdb;
+CREATE TABLE predictions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR(255),
+    prediction VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
